@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
-    padding-top:120px;
+    padding-top: 120px;
 }
 
 .form {
@@ -24,13 +24,13 @@ body {
     border-radius: 2.5em;
     padding: 30px;
     width: 300px;
-    height: 290px;
+    height: 350px;
 }
 
     .form::before {
         content: '';
         background-image: linear-gradient(45deg, #ff0000, #ffb700);
-        height: 290px;
+        height: 350px;
         width: 309px;
         position: absolute;
         margin-top: -34px;
