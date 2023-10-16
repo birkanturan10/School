@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7C9NHN0r7KFduhl1sQEzC8x0uhbiNyNKWcUdd9uv+J8=",
+  "Hash": "CmubvFTMFTQdg/R3JD0+n/aUJCethoioRB10PVYz8yA=",
   "Source": "UI",
   "BasePath": "_content/UI",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\StyleSheets\\LoginSheet.css"
+    },
+    {
+      "Identity": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\StyleSheets\\SignUpSheet.css",
+      "SourceId": "UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\",
+      "BasePath": "_content/UI",
+      "RelativePath": "StyleSheets/SignUpSheet.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\StyleSheets\\SignUpSheet.css"
     }
   ]
 }

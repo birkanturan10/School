@@ -13,5 +13,10 @@ namespace UI.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult TeacherLogin()
+		{
+			return View();
+		}
 	}
 }

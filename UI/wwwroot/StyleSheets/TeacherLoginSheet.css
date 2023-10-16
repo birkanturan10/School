@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
-    padding-top: 50px;
+    padding-top: 100px;
 }
 
 .isteacher {
@@ -217,4 +217,3 @@ body {
 .shape {
     fill: #0E1822;
 }
-
