@@ -23,5 +23,15 @@ namespace UI.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult StudentIndex()
+		{
+			return View();
+		}
+
+		public IActionResult TeacherIndex()
+		{
+			return View();
+		}
 	}
 }
