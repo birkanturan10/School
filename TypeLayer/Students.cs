@@ -14,7 +14,7 @@ namespace TypeLayer
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StudentID { get; set; }
 
-        public int NoteID { get; set; }
+        public int? NoteID { get; set; }
 
         public string NameSurname { get; set; }
 

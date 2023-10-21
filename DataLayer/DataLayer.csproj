@@ -168,6 +168,10 @@
     <Compile Include="Migrations\20231018075334_School2.designer.cs">
       <DependentUpon>20231018075334_School2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231019161749_School3.cs" />
+    <Compile Include="Migrations\20231019161749_School3.designer.cs">
+      <DependentUpon>20231019161749_School3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
