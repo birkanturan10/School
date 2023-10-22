@@ -11792,7 +11792,8 @@
       "Microsoft.EntityFrameworkCore >= 3.1.32",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.32",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.32",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16",
+      "TypeLayer >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -11830,6 +11831,9 @@
           "projectReferences": {
             "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\DataLayer\\DataLayer.csproj": {
               "projectPath": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\DataLayer\\DataLayer.csproj"
+            },
+            "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\TypeLayer\\TypeLayer.csproj": {
+              "projectPath": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\TypeLayer\\TypeLayer.csproj"
             }
           }
         }

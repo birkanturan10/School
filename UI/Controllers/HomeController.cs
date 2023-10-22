@@ -68,5 +68,22 @@ namespace UI.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult AddLesson()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult AddLesson([Bind("LessonName")] Lessons lessons)
+		{
+			if (ModelState.IsValid)
+			{
+				context.Add(lessons);
+				context.SaveChanges();
+				return RedirectToAction(nameof(Login));
+			}
+			return View(lessons);
+		}
 	}
 }
