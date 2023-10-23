@@ -108,7 +108,7 @@ namespace UI.Controllers
 
 		public IActionResult TeacherIndex()
 		{
-			return View();
+			return View(context.tbl_notes);
 		}
 
 		public IActionResult AddLesson()
