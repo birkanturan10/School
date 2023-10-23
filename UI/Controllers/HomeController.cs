@@ -54,12 +54,54 @@ namespace UI.Controllers
 			return View();
 		}
 
-		public IActionResult TeacherSignUp()
+		[HttpPost]
+		public async Task<IActionResult> TeacherLogin(string TCKimlikNo, string Password)
 		{
-			return View();
+			var user = await context.tbl_teachers.SingleOrDefaultAsync(u => u.TCKimlikNo == TCKimlikNo && u.Password == Password);
+
+			if(user == null)
+			{
+				ModelState.AddModelError(string.Empty, "Geçersiz T.C. Kimlik No veya Şifre.");
+				return View();
+			}
+
+			return RedirectToAction("TeacherIndex");
 		}
 
-		public IActionResult StudentIndex()
+		public IActionResult TeacherSignUp()
+		{
+            var lessons = GetLessonsFromDatabase();
+            ViewBag.Lessons = lessons; // Ders verilerini ViewBag aracılığıyla taşıyın
+            return View();
+        }
+
+		[HttpPost]
+		public IActionResult TeacherSignUp(string NameSurname, int LessonID, string TCKimlikNo, string Password)
+		{
+			var newTeacher = new Teachers
+			{
+				NameSurname = NameSurname,
+				LessonID = LessonID,
+				TCKimlikNo = TCKimlikNo,
+				Password = Password
+			};
+
+			context.tbl_teachers.Add(newTeacher);
+			context.SaveChanges();
+
+			return RedirectToAction("TeacherLogin");
+		}
+
+        public List<Lessons> GetLessonsFromDatabase()
+        {
+            using (var context = new Context()) // Context sınıfınızı kullanarak veritabanı bağlantısı oluşturun
+            {
+                var lessons = context.tbl_lessons.ToList(); // Ders verilerini veritabanından çekin
+                return lessons;
+            }
+        }
+
+        public IActionResult StudentIndex()
 		{
 			return View();
 		}
