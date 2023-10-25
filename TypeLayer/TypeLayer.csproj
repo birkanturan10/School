@@ -163,6 +163,7 @@
     <Compile Include="Notes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Students.cs" />
+    <Compile Include="TeacherNotesViewModel.cs" />
     <Compile Include="Teachers.cs" />
   </ItemGroup>
   <ItemGroup>

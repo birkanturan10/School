@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xpaoNy6t62UmvLYSyuWq7jm2Fnl3Z6bdz/vChsG5f54=",
+  "Hash": "xdffO/DexaMUY4Gar7xQ7N0HXMRMb7izvwjl5HWlAoA=",
   "Source": "UI",
   "BasePath": "_content/UI",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\StyleSheets\\SignUpSheet.css"
+    },
+    {
+      "Identity": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\StyleSheets\\TeacherIndexSheet.css",
+      "SourceId": "UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\",
+      "BasePath": "_content/UI",
+      "RelativePath": "StyleSheets/TeacherIndexSheet.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\StyleSheets\\TeacherIndexSheet.css"
     },
     {
       "Identity": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\StyleSheets\\TeacherLoginSheet.css",

@@ -94,9 +94,9 @@ namespace UI.Controllers
 
         public List<Lessons> GetLessonsFromDatabase()
         {
-            using (var context = new Context()) // Context sınıfınızı kullanarak veritabanı bağlantısı oluşturun
+            using (var context = new Context()) 
             {
-                var lessons = context.tbl_lessons.ToList(); // Ders verilerini veritabanından çekin
+                var lessons = context.tbl_lessons.ToList(); 
                 return lessons;
             }
         }
@@ -108,7 +108,7 @@ namespace UI.Controllers
 
 		public IActionResult TeacherIndex()
 		{
-			return View(context.tbl_notes);
+			return View(context.tbl_teachers);
 		}
 
 		public IActionResult AddLesson()
@@ -126,6 +126,16 @@ namespace UI.Controllers
 				return RedirectToAction(nameof(Login));
 			}
 			return View(lessons);
+		}
+
+		public IActionResult ViewYourStudents()
+		{
+			return View(context.tbl_students);
+		}
+
+		public IActionResult EnterNotes()
+		{
+			return View();
 		}
 	}
 }

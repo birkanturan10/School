@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\StyleSheets\\SignUpSheet.css"
     },
     {
+      "Id": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\StyleSheets\\TeacherIndexSheet.css",
+      "PackagePath": "staticwebassets\\StyleSheets\\TeacherIndexSheet.css"
+    },
+    {
       "Id": "C:\\Users\\birka\\Desktop\\İ - Akademi Kurs ve Yazılım Projeleri\\Projelerim\\School\\UI\\wwwroot\\StyleSheets\\TeacherLoginSheet.css",
       "PackagePath": "staticwebassets\\StyleSheets\\TeacherLoginSheet.css"
     },

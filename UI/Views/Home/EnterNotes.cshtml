@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EnterNotes</title>
+</head>
+<body>
+	@*<div style="padding:30px;">
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">@Html.DisplayNameFor(model=>model.NoteID)</th>
+						<th scope="col">@Html.DisplayNameFor(model=>model.LessonID)</th>
+						<th scope="col">@Html.DisplayNameFor(model=>model.FirstExam)</th>
+						<th scope="col">@Html.DisplayNameFor(model=>model.SecondExam)</th>
+						<th scope="col">@Html.DisplayNameFor(model=>model.Project)</th>
+						<th scope="col">@Html.DisplayNameFor(model=>model.AverageNote)</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<th scope="row">@Html.DisplayFor(ModelItem=>item.NoteID)</th>
+							<td>@Html.DisplayFor(ModelItem=>item.LessonID)</td>
+							<td>@Html.DisplayFor(ModelItem=>item.FirstExam)</td>
+							<td>@Html.DisplayFor(ModelItem=>item.SecondExam)</td>
+							<td>@Html.DisplayFor(ModelItem=>item.Project)</td>
+							<td>@Html.DisplayFor(ModelItem=>item.AverageNote)</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>*@
+</body>
+</html>
