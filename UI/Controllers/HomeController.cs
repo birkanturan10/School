@@ -101,7 +101,25 @@ namespace UI.Controllers
             }
         }
 
-        public IActionResult StudentIndex()
+		public List<Students> GetStudentsFromDatabase()
+		{
+			using (var context = new Context())
+			{
+				var students = context.tbl_students.ToList();
+				return students;
+			}
+		}
+
+		public List<Notes> GetNotesFromDatabase()
+		{
+			using (var context = new Context())
+			{
+				var notes = context.tbl_notes.ToList();
+				return notes;
+			}
+		}
+
+		public IActionResult StudentIndex()
 		{
 			return View();
 		}
@@ -130,12 +148,33 @@ namespace UI.Controllers
 
 		public IActionResult ViewYourStudents()
 		{
-			return View(context.tbl_students);
+			List<Students> Student = GetStudentsFromDatabase();
+			List<Notes> Note = GetNotesFromDatabase();
+
+			TeacherNotesViewModel viewModel = new TeacherNotesViewModel
+			{
+				Student = Student,
+				Note = Note
+			};
+
+			return View("EnterNotes", viewModel);
 		}
 
 		public IActionResult EnterNotes()
 		{
 			return View();
 		}
+
+		//[HttpPost]
+		//public IActionResult EnterNotes([Bind("NameSurname,FirstExam,SecondExam,Project")] TeacherNotesViewModel teacherNotesViewModel)
+		//{
+		//	if (ModelState.IsValid)
+		//	{
+		//		context.Add(teacherNotesViewModel);
+		//		context.SaveChanges();
+		//		return RedirectToAction(nameof(TeacherIndex));
+		//	}
+		//	return View(teacherNotesViewModel);
+		//}
 	}
 }

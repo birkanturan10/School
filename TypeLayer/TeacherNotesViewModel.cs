@@ -8,7 +8,7 @@ namespace TypeLayer
 {
 	public class TeacherNotesViewModel
 	{
-		public IEnumerable<Notes> Note { get; set; }
-		public IEnumerable<Students> Student { get; set; }
+		public List<Notes> Note { get; set; }
+		public List<Students> Student { get; set; }
 	}
 }
