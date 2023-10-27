@@ -25,34 +25,37 @@
 			</button>
 		</a>
 	</div>
-	@*<!--Table-->
-	<div style="padding:100px;">
+	<!--Table-->
+	<div style="padding:50px;">
 		<div class="container" style="padding:30px;width:300px;">
-			<form asp-action="EnterNotes">
+			<form asp-action="EnterNotes" method="post" asp-controller="Home">
 				<div class="input-group input-group-sm mb-3">
 					<select class="input" name="StudentID">
 						<option value="StudentID" style="color:black;">Öğrenci Seçiniz</option>
-						@foreach (var student in ViewBag.students)
+						@foreach (var student in Model.Student)
 						{
 							<option value="@student.StudentID" style="color:black;">@student.NameSurname</option>
 						}
 					</select>
 
+					<div>
 					<span class="input-group-text" id="inputGroup-sizing-sm">Birinci Sınav:</span>
-					<input asp-for="Student[]" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-
+					<input name="FirstExam" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					</div>
+					<div>
 					<span class="input-group-text" id="inputGroup-sizing-sm">İkinci Sınav:</span>
-					<input asp-for="SecondExam" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-
+					<input name="SecondExam" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					</div>
+					<div>
 					<span class="input-group-text" id="inputGroup-sizing-sm">Proje:</span>
-					<input asp-for="Project" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-
+					<input name="Project" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+					</div>
 				</div>
 				<div>
-					<input asp-action="AddLesson" type="submit" value="Kaydet" class="btn btn-dark" />
+					<input type="submit" value="Kaydet" class="btn btn-dark" />
 				</div>
 			</form>
 		</div>
-	</div>*@
+	</div>
 </body>
 </html>

@@ -14,7 +14,9 @@ namespace TypeLayer
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NoteID { get; set; }
 
-        public int LessonID { get; set; }
+        public int StudentID { get; set; }
+
+        public int? LessonID { get; set; }
 
         public int FirstExam { get; set; }
 
@@ -27,5 +29,7 @@ namespace TypeLayer
         public string DidItPass { get; set; }
 
         public Lessons Lesson { get; set; }
+
+        public Students Student { get; set; }
     }
 }
