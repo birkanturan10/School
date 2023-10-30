@@ -34,7 +34,7 @@ namespace DataLayer
 			modelBuilder.Entity<Students>()
 				.HasOne(s => s.Note)
 				.WithMany()
-				.HasForeignKey(s => s.NoteId);
+				.HasForeignKey(s => s.NoteID);
 
 			modelBuilder.Entity<Notes>()
 				.HasOne(n => n.Lesson)

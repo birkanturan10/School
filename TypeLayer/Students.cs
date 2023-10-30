@@ -16,7 +16,9 @@ namespace TypeLayer
         [DisplayName("ID")]
         public int StudentID { get; set; }
 
-        public int? NoteId { get; set; }
+        public int? NoteID { get; set; }
+
+        public int? LessonID { get; set; }
 
 		[DisplayName("Ad-Soyad")]
 		public string NameSurname { get; set; }
@@ -26,5 +28,7 @@ namespace TypeLayer
         public string Password { get; set; }
 
         public Notes Note { get; set; }
-    }
+
+		public Lessons Lesson { get; set; }
+	}
 }

@@ -187,41 +187,56 @@ namespace UI.Controllers
 			return View(GetTeacherNotesViewModel);
 		}
 
-        [HttpPost]
-        public IActionResult EnterNotes([Bind("FirstExam,SecondExam,Project")] Notes notes, int StudentID)
-        {
-            if (ModelState.IsValid)
-            {
-                // Öğrencinin veritabanında varlığını kontrol edin
-                var student = context.tbl_students.FirstOrDefault(x => x.StudentID == StudentID);
+		[HttpPost]
+		public IActionResult EnterNotes([Bind("FirstExam,SecondExam,Project")] Notes notes, int StudentID)
+		{
+			if (ModelState.IsValid)
+			{
+				var student = context.tbl_students.Include(s => s.Note).FirstOrDefault(s => s.StudentID == StudentID);
 
-                if (student != null)
-                {
-                    int? LessonID = context.tbl_teachers.FirstOrDefault(x => x.TeacherID == GlobalDegiskenler.Id).LessonID;
-                    notes.LessonID = LessonID;
+				if (student != null)
+				{
+					if (notes.FirstExam >= 0 && notes.SecondExam >= 0 && notes.Project >= 0)
+					{
+						notes.AverageNote = (notes.FirstExam + notes.SecondExam + notes.Project) / 3;
 
-                    // Notu ekleyin
-                    context.Add(notes);
-                    context.SaveChanges();
+						if (notes.AverageNote >= 50)
+						{
+							notes.DidItPass = "Geçti";
+						}
+						else
+						{
+							notes.DidItPass = "Kaldı";
+						}
 
-                    // Öğrencinin not bilgilerini güncelleyin
-                    student.NoteId = notes.NoteID;
-                    context.Update(student);
-                    context.SaveChanges();
+						notes.StudentID = student.StudentID;
 
-                    return RedirectToAction(nameof(TeacherIndex));
-                }
-                else
-                {
-                    // Öğrenci bulunamadı, hata işleme kodu
-                    ModelState.AddModelError(string.Empty, "Öğrenci bulunamadı.");
-                    return View();
-                }
-            }
-            return View();
-        }
+						context.tbl_notes.Add(notes);
+						context.SaveChanges();
 
-        public class GlobalDegiskenler
+						student.Note = notes;
+						context.tbl_students.Update(student);
+						context.SaveChanges();
+
+						return RedirectToAction(nameof(TeacherIndex));
+					}
+					else
+					{
+						ModelState.AddModelError(string.Empty, "Notlar geçersiz.");
+						return View();
+					}
+				}
+				else
+				{
+					ModelState.AddModelError(string.Empty, "Öğrenci bulunamadı.");
+					return View();
+				}
+			}
+
+			return View();
+		}
+
+		public class GlobalDegiskenler
 		{
 			public static int Id { get; set; }
 		}
