@@ -1,4 +1,5 @@
-﻿
+﻿@model TypeLayer.StudentGradesViewModel
+
 @{
     Layout = null;
 }
@@ -9,10 +10,42 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Öğrenci Kontrol</title>
-    <!--Bootstrap Links-->
+    <!-- Bootstrap Links -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!--LoginSheet.css-->
+    <link href="~/stylesheets/loginsheet.css" rel="stylesheet" />
 </head>
 <body>
+    <!-- Table -->
+    <div style="padding: 30px;">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ders Adı</th>
+                        <th>Birinci Sınav</th>
+                        <th>İkinci Sınav</th>
+                        <th>Proje</th>
+                        <th>Ortalama Puan</th>
+                        <th>Geçti Mi?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var grade in Model.StudentNoteLesson)
+                    {
+                        <tr>
+                            <td>@grade.Lesson.LessonName</td>
+                            <td>@grade.Notes.FirstExam</td>
+                            <td>@grade.Notes.SecondExam</td>
+                            <td>@grade.Notes.Project</td>
+                            <td>@grade.Notes.AverageNote</td>
+                            <td>@grade.Notes.DidItPass</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

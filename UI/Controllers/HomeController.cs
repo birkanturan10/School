@@ -124,12 +124,40 @@ namespace UI.Controllers
 			}
 		}
 
-		public IActionResult StudentIndex()
-		{
-			return View();
-		}
+        public IActionResult StudentIndex(int studentId)
+        {
+            var studentNotesLessonsList = new List<StudentsNotesLessons>();
 
-		public IActionResult TeacherIndex()
+            var student = context.tbl_students.FirstOrDefault(s => s.StudentID == studentId);
+
+            if (student != null)
+            {
+                var studentNotes = context.tbl_notes.FirstOrDefault(n => n.StudentID == studentId);
+
+                if (studentNotes != null)
+                {
+                    var lesson = context.tbl_lessons.FirstOrDefault(l => l.LessonID == studentNotes.LessonID);
+
+                    var studentNotesLessons = new StudentsNotesLessons
+                    {
+                        Student = student,
+                        Notes = studentNotes,
+                        Lesson = lesson
+                    };
+
+                    studentNotesLessonsList.Add(studentNotesLessons);
+                }
+            }
+
+            var viewModel = new StudentGradesViewModel
+            {
+                StudentNoteLesson = studentNotesLessonsList
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult TeacherIndex()
 		{
 			return View(context.tbl_teachers);
 		}
