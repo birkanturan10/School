@@ -29,6 +29,6 @@ namespace TypeLayer
 
         public Notes Note { get; set; }
 
-		public Lessons Lesson { get; set; }
+        public Lessons Lesson { get; set; }
 	}
 }

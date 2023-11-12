@@ -12,15 +12,13 @@ namespace TypeLayer
 
         public List<Notes> Note { get; set; }
 
-        public List<Students> Student { get; set; }
-
-        public List<StudentsNotesLessons> StudentNoteLesson { get; set; }
+        public List<LessonsNotes> LessonNote { get; set; }
     }
 
-    public class StudentsNotesLessons
+    public class LessonsNotes
     {
-        public Students Student { get; set; }
         public Notes Notes { get; set; }
+
         public Lessons Lesson { get; set; }
     }
 }

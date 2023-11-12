@@ -17,6 +17,7 @@ namespace TypeLayer
 	public class StudentNotes
 	{
 		public Students Student { get; set; }
+
 		public Notes Notes { get; set; }
 	}
 }

@@ -124,37 +124,9 @@ namespace UI.Controllers
 			}
 		}
 
-        public IActionResult StudentIndex(int studentId)
+        public IActionResult StudentIndex()
         {
-            var studentNotesLessonsList = new List<StudentsNotesLessons>();
-
-            var student = context.tbl_students.FirstOrDefault(s => s.StudentID == studentId);
-
-            if (student != null)
-            {
-                var studentNotes = context.tbl_notes.FirstOrDefault(n => n.StudentID == studentId);
-
-                if (studentNotes != null)
-                {
-                    var lesson = context.tbl_lessons.FirstOrDefault(l => l.LessonID == studentNotes.LessonID);
-
-                    var studentNotesLessons = new StudentsNotesLessons
-                    {
-                        Student = student,
-                        Notes = studentNotes,
-                        Lesson = lesson
-                    };
-
-                    studentNotesLessonsList.Add(studentNotesLessons);
-                }
-            }
-
-            var viewModel = new StudentGradesViewModel
-            {
-                StudentNoteLesson = studentNotesLessonsList
-            };
-
-            return View(viewModel);
+			return View();
         }
 
         public IActionResult TeacherIndex()
@@ -188,7 +160,8 @@ namespace UI.Controllers
 
             foreach (var student in students)
             {
-                var note = notes.FirstOrDefault(n => n.StudentID == student.StudentID);
+				var LessonID = context.tbl_teachers.FirstOrDefault(x => x.TeacherID == GlobalDegiskenler.Id).LessonID;
+                var note = notes.OrderByDescending(x => x.NoteID).FirstOrDefault(n => n.StudentID == student.StudentID && n.LessonID == LessonID);
                 if (note != null)
                 {
                     var studentNotes = new StudentNotes
@@ -215,56 +188,61 @@ namespace UI.Controllers
 			return View(GetTeacherNotesViewModel);
 		}
 
-		[HttpPost]
-		public IActionResult EnterNotes([Bind("FirstExam,SecondExam,Project")] Notes notes, int StudentID)
-		{
-			if (ModelState.IsValid)
-			{
-				var student = context.tbl_students.Include(s => s.Note).FirstOrDefault(s => s.StudentID == StudentID);
+        [HttpPost]
+        public IActionResult EnterNotes([Bind("FirstExam,SecondExam,Project")] Notes notes, int StudentID)
+        {
+            if (ModelState.IsValid)
+            {
+                var student = context.tbl_students.Include(s => s.Note).FirstOrDefault(s => s.StudentID == StudentID);
 
-				if (student != null)
-				{
-					if (notes.FirstExam >= 0 && notes.SecondExam >= 0 && notes.Project >= 0)
-					{
-						notes.AverageNote = (notes.FirstExam + notes.SecondExam + notes.Project) / 3;
+                if (student != null)
+                {
+                    if (notes.FirstExam >= 0 && notes.SecondExam >= 0 && notes.Project >= 0)
+                    {
+                        notes.AverageNote = (notes.FirstExam + notes.SecondExam + notes.Project) / 3;
 
-						if (notes.AverageNote >= 50)
-						{
-							notes.DidItPass = "Geçti";
-						}
-						else
-						{
-							notes.DidItPass = "Kaldı";
-						}
+                        if (notes.AverageNote >= 50)
+                        {
+                            notes.DidItPass = "Geçti";
+                        }
+                        else
+                        {
+                            notes.DidItPass = "Kaldı";
+                        }
 
-						notes.StudentID = student.StudentID;
+                        int? LessonID = context.tbl_teachers.FirstOrDefault(x => x.TeacherID == GlobalDegiskenler.Id).LessonID;
 
-						context.tbl_notes.Add(notes);
-						context.SaveChanges();
+                        notes.LessonID = LessonID;
+                        student.LessonID = LessonID;
 
-						student.Note = notes;
-						context.tbl_students.Update(student);
-						context.SaveChanges();
+                        notes.StudentID = student.StudentID;
 
-						return RedirectToAction(nameof(TeacherIndex));
-					}
-					else
-					{
-						ModelState.AddModelError(string.Empty, "Notlar geçersiz.");
-						return View();
-					}
-				}
-				else
-				{
-					ModelState.AddModelError(string.Empty, "Öğrenci bulunamadı.");
-					return View();
-				}
-			}
+                        context.tbl_notes.Add(notes);
+                        context.SaveChanges();
 
-			return View();
-		}
+                        student.Note = notes;
+                        context.tbl_students.Update(student);
+                        context.SaveChanges();
 
-		public class GlobalDegiskenler
+                        return RedirectToAction(nameof(TeacherIndex));
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Notlar geçersiz.");
+                        return View();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Öğrenci bulunamadı.");
+                    return View();
+                }
+            }
+
+            return View();
+        }
+
+        public class GlobalDegiskenler
 		{
 			public static int Id { get; set; }
 		}
