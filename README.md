@@ -1,5 +1,5 @@
 # School
-Öğretmen kaydı yapıp öğrencilere not girebileceğiniz, öğrenci kaydı yapıp öğretmenin girdiği notları görebilieceğiniz kapsamlı bir not görüntüleme sistemi/okul projesidir.
+Öğretmen kaydı yapıp öğrencilere not girebileceğiniz, öğrenci kaydı yapıp öğretmenin girdiği notları görebileceğiniz kapsamlı bir not görüntüleme sistemi/okul projesidir.
 
 Projeyi Nasıl Çalıştırabilirim?
 1. DataLayer içerisindeki Context classına gidip SQL bilgilerinizi değiştirin.
