@@ -21,13 +21,13 @@ namespace UI.Controllers
         {
             var user = await context.tbl_students.SingleOrDefaultAsync(u => u.TCKimlikNo == TCKimlikNo && u.Password == Password);
 
-			
-
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Geçersiz T.C. Kimlik No veya Şifre.");
                 return View();
             }
+
+            HttpContext.Session.SetInt32("OgrenciId", user.StudentID);
 
             return RedirectToAction("StudentIndex"); 
         }
@@ -127,22 +127,30 @@ namespace UI.Controllers
 
         public IActionResult StudentIndex()
         {
+            var ogrenciId = HttpContext.Session.GetInt32("OgrenciId");
+
+            if (ogrenciId == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             GradesViewModel.NotesWithLessons = context.tbl_notes
-        .Join(context.tbl_lessons,
-              note => note.LessonID,
-              lesson => lesson.LessonID,
-              (note, lesson) => new NotesWithLessonsViewModel
-              {
-                  NoteID = note.NoteID,
-                  StudentID = note.StudentID,
-                  LessonName = lesson.LessonName,
-                  FirstExam = note.FirstExam,
-                  SecondExam = note.SecondExam,
-                  Project = note.Project,
-                  AverageNote = note.AverageNote,
-                  DidItPass = note.DidItPass
-              })
-        .ToList();
+                .Join(context.tbl_lessons,
+                      note => note.LessonID,
+                      lesson => lesson.LessonID,
+                      (note, lesson) => new NotesWithLessonsViewModel
+                      {
+                          NoteID = note.NoteID,
+                          StudentID = note.StudentID,
+                          LessonName = lesson.LessonName,
+                          FirstExam = note.FirstExam,
+                          SecondExam = note.SecondExam,
+                          Project = note.Project,
+                          AverageNote = note.AverageNote,
+                          DidItPass = note.DidItPass
+                      })
+                .Where(note => note.StudentID == ogrenciId)
+                .ToList();
 
             return View(GradesViewModel);
         }
