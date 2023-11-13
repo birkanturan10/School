@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231019161749_School3")]
-    partial class School3
+    [Migration("20231112175714_School1")]
+    partial class School1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("TypeLayer.Lessons", b =>
                 {
-                    b.Property<int>("LessonID")
+                    b.Property<int?>("LessonID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -52,7 +52,7 @@ namespace DataLayer.Migrations
                     b.Property<int>("FirstExam")
                         .HasColumnType("int");
 
-                    b.Property<int>("LessonID")
+                    b.Property<int?>("LessonID")
                         .HasColumnType("int");
 
                     b.Property<int>("Project")
@@ -61,9 +61,10 @@ namespace DataLayer.Migrations
                     b.Property<int>("SecondExam")
                         .HasColumnType("int");
 
-                    b.HasKey("NoteID");
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
 
-                    b.HasIndex("LessonID");
+                    b.HasKey("NoteID");
 
                     b.ToTable("tbl_notes");
                 });
@@ -78,9 +79,6 @@ namespace DataLayer.Migrations
                     b.Property<string>("NameSurname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NoteID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -88,8 +86,6 @@ namespace DataLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentID");
-
-                    b.HasIndex("NoteID");
 
                     b.ToTable("tbl_students");
                 });
@@ -101,7 +97,7 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("LessonID")
+                    b.Property<int?>("LessonID")
                         .HasColumnType("int");
 
                     b.Property<string>("NameSurname")
@@ -120,29 +116,11 @@ namespace DataLayer.Migrations
                     b.ToTable("tbl_teachers");
                 });
 
-            modelBuilder.Entity("TypeLayer.Notes", b =>
-                {
-                    b.HasOne("TypeLayer.Lessons", "Lesson")
-                        .WithMany()
-                        .HasForeignKey("LessonID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TypeLayer.Students", b =>
-                {
-                    b.HasOne("TypeLayer.Notes", "Note")
-                        .WithMany()
-                        .HasForeignKey("NoteID");
-                });
-
             modelBuilder.Entity("TypeLayer.Teachers", b =>
                 {
                     b.HasOne("TypeLayer.Lessons", "Lesson")
                         .WithMany()
-                        .HasForeignKey("LessonID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LessonID");
                 });
 #pragma warning restore 612, 618
         }

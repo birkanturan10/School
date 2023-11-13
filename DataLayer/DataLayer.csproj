@@ -160,21 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
-    <Compile Include="Migrations\20231018074010_School1.cs" />
-    <Compile Include="Migrations\20231018074010_School1.designer.cs">
-      <DependentUpon>20231018074010_School1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231018075334_School2.cs" />
-    <Compile Include="Migrations\20231018075334_School2.designer.cs">
-      <DependentUpon>20231018075334_School2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231019161749_School3.cs" />
-    <Compile Include="Migrations\20231019161749_School3.designer.cs">
-      <DependentUpon>20231019161749_School3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231027115618_School4.cs" />
-    <Compile Include="Migrations\20231027115618_School4.designer.cs">
-      <DependentUpon>20231027115618_School4.cs</DependentUpon>
+    <Compile Include="Migrations\20231112175714_School1.cs" />
+    <Compile Include="Migrations\20231112175714_School1.designer.cs">
+      <DependentUpon>20231112175714_School1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

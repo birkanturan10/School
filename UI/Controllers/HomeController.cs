@@ -9,6 +9,7 @@ namespace UI.Controllers
 	{
 		Context context = new Context();
 		TeacherNotesViewModel GetTeacherNotesViewModel = new TeacherNotesViewModel();
+        StudentGradesViewModel GradesViewModel = new StudentGradesViewModel();
 
 		public IActionResult Login()
 		{
@@ -126,7 +127,24 @@ namespace UI.Controllers
 
         public IActionResult StudentIndex()
         {
-			return View();
+            GradesViewModel.NotesWithLessons = context.tbl_notes
+        .Join(context.tbl_lessons,
+              note => note.LessonID,
+              lesson => lesson.LessonID,
+              (note, lesson) => new NotesWithLessonsViewModel
+              {
+                  NoteID = note.NoteID,
+                  StudentID = note.StudentID,
+                  LessonName = lesson.LessonName,
+                  FirstExam = note.FirstExam,
+                  SecondExam = note.SecondExam,
+                  Project = note.Project,
+                  AverageNote = note.AverageNote,
+                  DidItPass = note.DidItPass
+              })
+        .ToList();
+
+            return View(GradesViewModel);
         }
 
         public IActionResult TeacherIndex()
@@ -193,7 +211,7 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = context.tbl_students.Include(s => s.Note).FirstOrDefault(s => s.StudentID == StudentID);
+                var student = context.tbl_students.FirstOrDefault(s => s.StudentID == StudentID);
 
                 if (student != null)
                 {
@@ -212,17 +230,43 @@ namespace UI.Controllers
 
                         int? LessonID = context.tbl_teachers.FirstOrDefault(x => x.TeacherID == GlobalDegiskenler.Id).LessonID;
 
-                        notes.LessonID = LessonID;
-                        student.LessonID = LessonID;
+                        int? count = context.tbl_notes.Count();
+                        int primary = context.tbl_notes.Where(x => x.StudentID == StudentID && x.LessonID == LessonID).Count();
 
-                        notes.StudentID = student.StudentID;
+                        if (count > 0)
+                        {
+                            var existingNote = context.tbl_notes.FirstOrDefault(x => x.StudentID == StudentID && x.LessonID == LessonID);
 
-                        context.tbl_notes.Add(notes);
-                        context.SaveChanges();
+                            if (existingNote != null)
+                            {
+                                // İlgili kaydı güncelle
+                                existingNote.FirstExam = notes.FirstExam;
+                                existingNote.SecondExam = notes.SecondExam;
+                                existingNote.Project = notes.Project;
+                                // Diğer alanları güncelle...
 
-                        student.Note = notes;
-                        context.tbl_students.Update(student);
-                        context.SaveChanges();
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+                                // Yeni bir kayıt ekle
+                                notes.LessonID = LessonID;
+                                notes.NoteID = primary;
+                                notes.StudentID = student.StudentID;
+
+                                context.tbl_notes.Add(notes);
+                                context.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            // Yeni bir kayıt ekle
+                            notes.LessonID = LessonID;
+                            notes.StudentID = student.StudentID;
+
+                            context.tbl_notes.Add(notes);
+                            context.SaveChanges();
+                        }
 
                         return RedirectToAction(nameof(TeacherIndex));
                     }

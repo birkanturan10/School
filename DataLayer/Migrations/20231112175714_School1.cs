@@ -12,7 +12,7 @@ namespace DataLayer.Migrations
                 {
                     LessonID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LessonName = table.Column<string>(nullable: false)
+                    LessonName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,11 +25,12 @@ namespace DataLayer.Migrations
                 {
                     NoteID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LessonID = table.Column<int>(nullable: false),
-                    FirstExam = table.Column<int>(nullable: true),
-                    SecondExam = table.Column<int>(nullable: true),
-                    Project = table.Column<int>(nullable: true),
-                    AverageNote = table.Column<int>(nullable: true),
+                    StudentID = table.Column<int>(nullable: false),
+                    LessonID = table.Column<int>(nullable: true),
+                    FirstExam = table.Column<int>(nullable: false),
+                    SecondExam = table.Column<int>(nullable: false),
+                    Project = table.Column<int>(nullable: false),
+                    AverageNote = table.Column<int>(nullable: false),
                     DidItPass = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -43,10 +44,9 @@ namespace DataLayer.Migrations
                 {
                     StudentID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NoteID = table.Column<int>(nullable: false),
-                    NameSurname = table.Column<string>(nullable: false),
-                    TCKimlikNo = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    NameSurname = table.Column<string>(nullable: true),
+                    TCKimlikNo = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,22 +59,30 @@ namespace DataLayer.Migrations
                 {
                     TeacherID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LessonID = table.Column<int>(nullable: false),
-                    NameSurname = table.Column<string>(nullable: false),
-                    TCKimlikNo = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    LessonID = table.Column<int>(nullable: true),
+                    NameSurname = table.Column<string>(nullable: true),
+                    TCKimlikNo = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbl_teachers", x => x.TeacherID);
+                    table.ForeignKey(
+                        name: "FK_tbl_teachers_tbl_lessons_LessonID",
+                        column: x => x.LessonID,
+                        principalTable: "tbl_lessons",
+                        principalColumn: "LessonID",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_teachers_LessonID",
+                table: "tbl_teachers",
+                column: "LessonID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "tbl_lessons");
-
             migrationBuilder.DropTable(
                 name: "tbl_notes");
 
@@ -83,6 +91,9 @@ namespace DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbl_teachers");
+
+            migrationBuilder.DropTable(
+                name: "tbl_lessons");
         }
     }
 }

@@ -32,15 +32,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var grade in Model.LessonNote)
+                    @foreach (var grade in Model.NotesWithLessons)
                     {
                         <tr>
-                            <td>@grade.Lesson.LessonName</td>
-                            <td>@grade.Notes.FirstExam</td>
-                            <td>@grade.Notes.SecondExam</td>
-                            <td>@grade.Notes.Project</td>
-                            <td>@grade.Notes.AverageNote</td>
-                            <td>@grade.Notes.DidItPass</td>
+                            <td>@grade.LessonName</td>
+                            <td>@grade.FirstExam</td>
+                            <td>@grade.SecondExam</td>
+                            <td>@grade.Project</td>
+                            <td>@grade.AverageNote</td>
+                            <td>@grade.DidItPass</td>
                         </tr>
                     }
                 </tbody>

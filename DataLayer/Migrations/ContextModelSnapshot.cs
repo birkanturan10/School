@@ -21,7 +21,7 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("TypeLayer.Lessons", b =>
                 {
-                    b.Property<int>("LessonID")
+                    b.Property<int?>("LessonID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -64,10 +64,6 @@ namespace DataLayer.Migrations
 
                     b.HasKey("NoteID");
 
-                    b.HasIndex("LessonID");
-
-                    b.HasIndex("StudentID");
-
                     b.ToTable("tbl_notes");
                 });
 
@@ -81,9 +77,6 @@ namespace DataLayer.Migrations
                     b.Property<string>("NameSurname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NoteId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -91,8 +84,6 @@ namespace DataLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentID");
-
-                    b.HasIndex("NoteId");
 
                     b.ToTable("tbl_students");
                 });
@@ -121,26 +112,6 @@ namespace DataLayer.Migrations
                     b.HasIndex("LessonID");
 
                     b.ToTable("tbl_teachers");
-                });
-
-            modelBuilder.Entity("TypeLayer.Notes", b =>
-                {
-                    b.HasOne("TypeLayer.Lessons", "Lesson")
-                        .WithMany()
-                        .HasForeignKey("LessonID");
-
-                    b.HasOne("TypeLayer.Students", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TypeLayer.Students", b =>
-                {
-                    b.HasOne("TypeLayer.Notes", "Note")
-                        .WithMany()
-                        .HasForeignKey("NoteId");
                 });
 
             modelBuilder.Entity("TypeLayer.Teachers", b =>

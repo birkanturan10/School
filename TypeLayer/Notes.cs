@@ -27,9 +27,5 @@ namespace TypeLayer
         public int AverageNote { get; set; }
 
         public string DidItPass { get; set; }
-
-        public Lessons Lesson { get; set; }
-
-        public Students Student { get; set; }
     }
 }

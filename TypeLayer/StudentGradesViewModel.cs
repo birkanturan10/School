@@ -8,17 +8,19 @@ namespace TypeLayer
 {
     public class StudentGradesViewModel
     {
-        public List<Lessons> Lesson { get; set; }
-
-        public List<Notes> Note { get; set; }
-
-        public List<LessonsNotes> LessonNote { get; set; }
+        public List<NotesWithLessonsViewModel> NotesWithLessons { get; set; }
     }
 
-    public class LessonsNotes
+    public class NotesWithLessonsViewModel
     {
-        public Notes Notes { get; set; }
-
-        public Lessons Lesson { get; set; }
+        public int NoteID { get; set; }
+        public int StudentID { get; set; }
+        public string LessonName { get; set; }
+        public int FirstExam { get; set; }
+        public int SecondExam { get; set; }
+        public int Project { get; set; }
+        public int AverageNote { get; set; }
+        public string DidItPass { get; set; }
     }
+
 }

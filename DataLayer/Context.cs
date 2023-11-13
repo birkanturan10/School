@@ -30,21 +30,6 @@ namespace DataLayer
 				.HasOne(t => t.Lesson)
 				.WithMany()
 				.HasForeignKey(t => t.LessonID);
-
-			modelBuilder.Entity<Students>()
-				.HasOne(s => s.Note)
-				.WithMany()
-				.HasForeignKey(s => s.NoteID);
-
-			modelBuilder.Entity<Notes>()
-				.HasOne(n => n.Lesson)
-				.WithMany()
-				.HasForeignKey(n => n.LessonID);
-
-			modelBuilder.Entity<Notes>()
-	            .HasOne(n => n.Student)  
-	            .WithMany() 
-	            .HasForeignKey(n => n.StudentID); 
 		}
 	}
 }
