@@ -14,6 +14,6 @@ Kullanılan Teknolojiler
 3. MSSQL Server
 4. HTML
 5. CSS
-6. ASP .NET Core MVC
+6. ASP .NET Core
 7. Bootstrap
    
